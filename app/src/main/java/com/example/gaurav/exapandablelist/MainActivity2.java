@@ -1,0 +1,81 @@
+/*
+ * Copyright (C) 2012 Sreekumar SH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+package com.example.gaurav.exapandablelist;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+/**
+ * Activity that shows the list view
+ * @author <a href="http://sreekumar.sh" >Sreekumar SH </a> (sreekumar.sh@gmail.com)
+ *
+ */
+public class MainActivity2 extends Activity {
+	
+	/**children items with a key and value list */
+    private Map<String, ArrayList<String>> children;
+    DragNDropListView2 dndListView;
+    
+    
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        getData();
+        dndListView = (DragNDropListView2) findViewById(R.id.list_view_customizer);
+        dndListView.setGroupIndicator(null);
+        dndListView.setDragOnLongPress(true);
+        dndListView.setAdapter(new DragNDropAdapter2(this, new int[]{R.layout.row_item}, new int[]{R.id.txt__customizer_item}, children));
+    }
+    
+    /**
+     * simple function to fill the list
+     */
+    
+    private void getData()
+    {
+    	ArrayList<String> groups = new ArrayList<String>();
+    	children = Collections
+				.synchronizedMap(new LinkedHashMap<String, ArrayList<String>>());
+        for(int i = 0;i<4 ;i++)
+        {
+        	groups.add("group "+i);
+        	
+        }
+        for(String s : groups)
+        { 
+        	ArrayList<String> child = new ArrayList<String>();
+        	
+        	
+        	for(int i = 0;i<4 ;i++)
+            {
+        		
+        		child.add(s+" -value"+i);
+            	
+            	
+            }
+        	children.put(s, child);
+        }
+    }
+    
+}

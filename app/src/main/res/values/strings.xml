@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ExapandableList</string>
+    <string name="hello">Hello World, DownloaderActivity!</string>
+    <string name="blank"> </string>
+</resources>
